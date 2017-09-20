@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">CigaStop</string>
+    <string name="facebook_app_id">1940872619494009</string>
+    <string name="fb_login_protocol_scheme">fb1940872619494009</string>
 </resources>

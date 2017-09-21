@@ -52,6 +52,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onCompleted(JSONObject object, GraphResponse response) {
                         Log.v("result",object.toString());
+                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     }
                 });
 
@@ -73,7 +74,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         if(Profile.getCurrentProfile() != null)
-            Log.d("Profile", Profile.getCurrentProfile().getName());
+            startActivity(new Intent(LoginActivity.this, MainActivity.class));
     }
 
     @Override

@@ -14,6 +14,7 @@ import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.Profile;
+import com.facebook.login.LoginBehavior;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
@@ -44,7 +45,8 @@ public class LoginActivity extends AppCompatActivity {
 
         callbackManager = CallbackManager.Factory.create();
 
-        login_button.setReadPermissions(Arrays.asList("public_profile", "email"));
+        login_button.setReadPermissions(Arrays.asList("public_profile", "email", "friends"));
+        login_button.setLoginBehavior(LoginBehavior.WEB_VIEW_ONLY);
         login_button.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
@@ -73,8 +75,8 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        if(Profile.getCurrentProfile() != null)
-            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+//        if(Profile.getCurrentProfile() != null)
+//            startActivity(new Intent(LoginActivity.this, MainActivity.class));
     }
 
     @Override

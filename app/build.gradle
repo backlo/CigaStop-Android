@@ -4,7 +4,7 @@ android {
     compileSdkVersion 25
     buildToolsVersion "26.0.1"
     defaultConfig {
-        applicationId "com.example.lenovo.cigastop"
+        applicationId "com.bug.cigastop"
         minSdkVersion 19
         targetSdkVersion 25
         versionCode 1
@@ -33,8 +33,10 @@ dependencies {
     compile 'com.android.support:design:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.jakewharton:butterknife:+'
-    compile 'com.facebook.android:facebook-android-sdk:+'
-    compile 'com.android.support:support-v4:25.3.1'
-    testCompile 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:+'
+    compile 'com.facebook.android:facebook-android-sdk:+'
+    compile 'de.hdodenhof:circleimageview:+'
+    compile 'com.google.code.gson:gson:+'
+    compile 'com.github.bumptech.glide:glide:3.6.0'
+    testCompile 'junit:junit:4.12'
 }

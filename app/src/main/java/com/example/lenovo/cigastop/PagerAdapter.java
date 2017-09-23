@@ -30,7 +30,7 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
             case 1:
                 return new FriendFragment();
             case 2:
-                return new HomeFragment();
+                return new SettingFragment();
         }
         return null;
     }

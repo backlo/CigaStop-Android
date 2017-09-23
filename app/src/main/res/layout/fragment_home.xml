@@ -7,22 +7,36 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#d8d8d8"/>
+        android:background="#d8d8d8" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="40dp"
-            android:text="케이스 Loading..."
-            android:textSize="30sp"
-            android:textStyle="bold"
-            android:textColor="#000000"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:layout_marginTop="20dp"
+                android:text="케이스 Loading..."
+                android:textColor="#000000"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/open"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="open" />
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -35,9 +49,9 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="1"
+                android:textColor="#000000"
                 android:textSize="60sp"
-                android:textStyle="bold"
-                android:textColor="#000000"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -45,9 +59,9 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="30"
+                android:textColor="#000000"
                 android:textSize="60sp"
-                android:textStyle="bold"
-                android:textColor="#000000"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -55,9 +69,9 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="00"
+                android:textColor="#000000"
                 android:textSize="60sp"
-                android:textStyle="bold"
-                android:textColor="#000000"/>
+                android:textStyle="bold" />
 
         </LinearLayout>
 
@@ -72,9 +86,9 @@
                 android:layout_weight="1"
                 android:gravity="center_horizontal"
                 android:text="Hours"
+                android:textColor="#000000"
                 android:textSize="20sp"
-                android:textStyle="bold"
-                android:textColor="#000000"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -82,9 +96,9 @@
                 android:layout_weight="1"
                 android:gravity="center_horizontal"
                 android:text="Minutes"
+                android:textColor="#000000"
                 android:textSize="20sp"
-                android:textStyle="bold"
-                android:textColor="#000000"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -92,9 +106,9 @@
                 android:layout_weight="1"
                 android:gravity="center_horizontal"
                 android:text="Seconds"
+                android:textColor="#000000"
                 android:textSize="20sp"
-                android:textStyle="bold"
-                android:textColor="#000000"/>
+                android:textStyle="bold" />
 
         </LinearLayout>
 
@@ -103,7 +117,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#d8d8d8"/>
+        android:background="#d8d8d8" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -114,8 +128,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -138,14 +152,14 @@
         <View
             android:layout_width="1dp"
             android:layout_height="match_parent"
-            android:background="#d8d8d8"/>
+            android:background="#d8d8d8" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -153,6 +167,7 @@
                 android:text="13"
                 android:textColor="#000000"
                 android:textSize="60sp"
+                android:id="@+id/ciga"
                 android:textStyle="bold" />
 
             <TextView
@@ -168,14 +183,14 @@
         <View
             android:layout_width="1dp"
             android:layout_height="match_parent"
-            android:background="#d8d8d8"/>
+            android:background="#d8d8d8" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -198,7 +213,7 @@
         <View
             android:layout_width="1dp"
             android:layout_height="match_parent"
-            android:background="#d8d8d8"/>
+            android:background="#d8d8d8" />
 
     </LinearLayout>
 
@@ -206,20 +221,20 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#d8d8d8"/>
+        android:background="#d8d8d8" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center">
-        
+
         <ImageView
             android:layout_width="60dp"
             android:layout_height="100dp"
-            android:src="@drawable/battery"
+            android:layout_marginRight="50dp"
             android:scaleType="fitXY"
-            android:layout_marginRight="50dp"/>
+            android:src="@drawable/battery" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -229,8 +244,8 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="30dp">
+                android:layout_marginBottom="30dp"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -238,7 +253,7 @@
                     android:text="배터리 잔량 : "
                     android:textColor="#000000"
                     android:textSize="22sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -246,7 +261,7 @@
                     android:text="100%"
                     android:textColor="#000000"
                     android:textSize="22sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -261,7 +276,7 @@
                     android:text="담배 잔량 : "
                     android:textColor="#000000"
                     android:textSize="22sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -269,13 +284,13 @@
                     android:text="16개"
                     android:textColor="#000000"
                     android:textSize="22sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
             </LinearLayout>
-            
+
         </LinearLayout>
-        
+
     </LinearLayout>
-    
-    
+
+
 </LinearLayout>

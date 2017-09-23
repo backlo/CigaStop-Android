@@ -45,7 +45,7 @@ public class LoginActivity extends AppCompatActivity {
 
         callbackManager = CallbackManager.Factory.create();
 
-        login_button.setReadPermissions(Arrays.asList("public_profile", "email", "friends"));
+        login_button.setReadPermissions(Arrays.asList("public_profile", "email", "user_friends"));
         login_button.setLoginBehavior(LoginBehavior.WEB_VIEW_ONLY);
         login_button.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
@@ -75,8 +75,8 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-//        if(Profile.getCurrentProfile() != null)
-//            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+        if(Profile.getCurrentProfile() != null)
+            startActivity(new Intent(LoginActivity.this, MainActivity.class));
     }
 
     @Override

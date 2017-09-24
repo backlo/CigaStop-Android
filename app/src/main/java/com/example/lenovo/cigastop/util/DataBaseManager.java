@@ -3,6 +3,7 @@ package com.example.lenovo.cigastop.util;
 import android.util.Log;
 
 import com.example.lenovo.cigastop.model.FriendDto;
+import com.example.lenovo.cigastop.model.RankingEvent;
 import com.example.lenovo.cigastop.model.RankingModel;
 import com.example.lenovo.cigastop.model.UserInfo;
 import com.example.lenovo.cigastop.model.UserInfoArrayEvent;
@@ -17,6 +18,7 @@ import com.google.firebase.database.ValueEventListener;
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Created by trycatch on 2017. 9. 24..
@@ -44,6 +46,7 @@ public class DataBaseManager {
             userRef.child(data.getId()).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
+                    Log.d("userInfo", dataSnapshot.toString());
                     UserInfo userInfo = dataSnapshot.getValue(UserInfo.class);
                     infoArrayList.add(userInfo);
                     if(infoArrayList.size() == dataList.size())
@@ -52,7 +55,7 @@ public class DataBaseManager {
 
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
-
+                    EventBus.getDefault().post(new UserInfoArrayEvent(false, infoArrayList));
                 }
             });
         }
@@ -68,21 +71,32 @@ public class DataBaseManager {
 
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
-
+                    EventBus.getDefault().post(new UserInfoEvent(false, new UserInfo()));
                 }
             });
 
     }
 
     public void setRanking(RankingModel ranking){
-        rankingRef.child(Profile.getCurrentProfile().getId()).push().setValue(ranking);
+        ArrayList<UserInfo> infoArrayList = ranking.getRankingData();
+        String id = "";
+        for(int i = 0; i < infoArrayList.size(); i++)
+            id += infoArrayList.get(i).getId();
+        rankingRef.child(Profile.getCurrentProfile().getId()).child(id).setValue(ranking);
+        getRanking(Profile.getCurrentProfile().getId());
     }
 
     public void getRanking(String id){
         rankingRef.child(id).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Log.d("ranking", dataSnapshot.getValue(RankingModel.class).getRankingData().get(0).getName());
+                ArrayList<RankingModel> rankingModels = new ArrayList<RankingModel>();
+                Iterator<DataSnapshot> iterator = dataSnapshot.getChildren().iterator();
+                while(iterator.hasNext()) {
+                    DataSnapshot data = iterator.next();
+                    rankingModels.add(new RankingModel(data.getValue(RankingModel.class).getRankingData()));
+                }
+                EventBus.getDefault().post(new RankingEvent(true, rankingModels));
             }
 
             @Override

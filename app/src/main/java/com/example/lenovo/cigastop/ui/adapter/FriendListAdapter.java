@@ -69,9 +69,9 @@ public class FriendListAdapter extends BaseAdapter {
             Collections.sort(dataList.get(i), new Comparator<UserInfo>() {
                 @Override
                 public int compare(UserInfo o1, UserInfo o2) {
-                    if (o1.getCount() > o2.getCount())
+                    if (o1.getCount() < o2.getCount())
                         return 1;
-                    else if (o1.getCount() < o2.getCount())
+                    else if (o1.getCount() > o2.getCount())
                         return -1;
                     else
                         return 0;

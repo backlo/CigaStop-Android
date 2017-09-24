@@ -11,12 +11,15 @@ import android.widget.ListView;
 
 import com.example.lenovo.cigastop.R;
 import com.example.lenovo.cigastop.model.FriendAddEvent;
+import com.example.lenovo.cigastop.model.FriendDto;
+import com.example.lenovo.cigastop.model.RankingEvent;
 import com.example.lenovo.cigastop.model.RankingModel;
 import com.example.lenovo.cigastop.model.UserInfo;
 import com.example.lenovo.cigastop.model.UserInfoArrayEvent;
 import com.example.lenovo.cigastop.ui.activity.FriendAddActivity;
 import com.example.lenovo.cigastop.ui.adapter.FriendListAdapter;
 import com.example.lenovo.cigastop.util.DataBaseManager;
+import com.facebook.Profile;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -56,7 +59,7 @@ public class FriendFragment extends Fragment {
         adapter = new FriendListAdapter(getActivity(), dataList);
         ranking_list.setAdapter(adapter);
 
-        //DataBaseManager.getInstance().getRanking(Profile.getCurrentProfile().getId());
+        DataBaseManager.getInstance().getRanking(Profile.getCurrentProfile().getId());
 
         return v;
     }
@@ -79,9 +82,21 @@ public class FriendFragment extends Fragment {
     @Subscribe
     public void UserInfoArrayEvent(UserInfoArrayEvent userInfoEvent){
         if(userInfoEvent.isResult()){
-            dataList.add(userInfoEvent.getDataList());
-            adapter.setData(dataList);
             DataBaseManager.getInstance().setRanking(new RankingModel(userInfoEvent.getDataList()));
+        }
+    }
+
+    @Subscribe
+    public void RankingEvent(RankingEvent rankingEvent){
+        if(rankingEvent.isResult()){
+            if(rankingEvent.getRankingModels() != null){
+                ArrayList<RankingModel> rankingModels = rankingEvent.getRankingModels();
+                dataList = new ArrayList<>();
+                for(RankingModel rankingModel : rankingModels){
+                    dataList.add(rankingModel.getRankingData());
+                }
+                adapter.setData(dataList);
+            }
         }
     }
 }

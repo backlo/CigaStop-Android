@@ -27,6 +27,10 @@ public class FriendDto {
         return id;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public class Picture{
         @SerializedName("data")
         private Data data;

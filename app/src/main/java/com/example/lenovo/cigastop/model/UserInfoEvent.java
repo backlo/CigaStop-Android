@@ -8,11 +8,11 @@ import java.util.ArrayList;
 
 public class UserInfoEvent {
     private boolean result;
-    private ArrayList<UserInfo> dataList;
+    private UserInfo userInfo;
 
-    public UserInfoEvent(boolean result, ArrayList<UserInfo> dataList) {
+    public UserInfoEvent(boolean result, UserInfo userInfo) {
         this.result = result;
-        this.dataList = dataList;
+        this.userInfo = userInfo;
     }
 
     public boolean isResult() {
@@ -23,11 +23,11 @@ public class UserInfoEvent {
         this.result = result;
     }
 
-    public ArrayList<UserInfo> getDataList() {
-        return dataList;
+    public UserInfo getUserInfo() {
+        return userInfo;
     }
 
-    public void setDataList(ArrayList<UserInfo> dataList) {
-        this.dataList = dataList;
+    public void setUserInfo(UserInfo userInfo) {
+        this.userInfo = userInfo;
     }
 }

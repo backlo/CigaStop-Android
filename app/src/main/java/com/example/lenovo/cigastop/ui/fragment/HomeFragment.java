@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -16,6 +17,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.lenovo.cigastop.R;
+import com.example.lenovo.cigastop.model.UserInfo;
+import com.example.lenovo.cigastop.model.UserInfoEvent;
+import com.example.lenovo.cigastop.util.DataBaseManager;
+import com.facebook.Profile;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -37,6 +45,7 @@ public class HomeFragment extends Fragment {
 
     private BluetoothAdapter btAdapter = null;
     private BluetoothSocket btSocket = null;
+    private UserInfo userInfo = null;
 
     int todayCiga = 0;
     int allCiga = 0;
@@ -63,8 +72,11 @@ public class HomeFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this, v);
 
+        DataBaseManager.getInstance().getUserInfo(Profile.getCurrentProfile().getId());
+
         btAdapter = BluetoothAdapter.getDefaultAdapter();       // get Bluetooth adapter
 
+        EventBus.getDefault().register(this);
 
         if (checkBTState()) {
             BluetoothDevice device = btAdapter.getRemoteDevice(address);
@@ -90,6 +102,7 @@ public class HomeFragment extends Fragment {
         onBtn.setOnClickListener(new View.OnClickListener() {
 
             private boolean check = false;
+
             public void onClick(View v) {
                 onBtn.setBackgroundResource(R.drawable.lock);
                 mConnectedThread.write("1");
@@ -209,6 +222,12 @@ public class HomeFragment extends Fragment {
         ++allCiga;
         --remindCiga;
 
+        userInfo.setCount(allCiga);
+        userInfo.setToday(todayCiga);
+        userInfo.setRemind(remindCiga);
+
+        DataBaseManager.getInstance().setUserInfo(userInfo);
+
         todayciga.setText(String.valueOf(todayCiga));
         if (todayCiga == 20) {
             todayCiga = 0;
@@ -220,10 +239,32 @@ public class HomeFragment extends Fragment {
         }
 
         remindciga.setText(String.valueOf(remindCiga));
-        if(remindCiga == 0){
+        if (remindCiga == 0) {
             remindCiga = 20;
         }
 
     }
 
+    @Subscribe
+    public void UserInfoEvent(UserInfoEvent userInfoEvent) {
+        if (userInfoEvent.isResult()) {
+
+            userInfo = userInfoEvent.getUserInfo();
+            allCiga = userInfo.getCount();
+            allciga.setText(allCiga + "");
+
+            todayCiga = userInfo.getToday();
+            todayciga.setText(todayCiga + "");
+
+            remindCiga = userInfo.getRemind();
+            remindciga.setText(remindCiga + "");
+        }
+
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        EventBus.getDefault().unregister(this);
+    }
 }

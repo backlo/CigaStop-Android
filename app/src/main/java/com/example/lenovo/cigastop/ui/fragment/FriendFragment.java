@@ -3,7 +3,6 @@ package com.example.lenovo.cigastop.ui.fragment;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,11 +13,10 @@ import com.example.lenovo.cigastop.R;
 import com.example.lenovo.cigastop.model.FriendAddEvent;
 import com.example.lenovo.cigastop.model.RankingModel;
 import com.example.lenovo.cigastop.model.UserInfo;
-import com.example.lenovo.cigastop.model.UserInfoEvent;
+import com.example.lenovo.cigastop.model.UserInfoArrayEvent;
 import com.example.lenovo.cigastop.ui.activity.FriendAddActivity;
 import com.example.lenovo.cigastop.ui.adapter.FriendListAdapter;
 import com.example.lenovo.cigastop.util.DataBaseManager;
-import com.facebook.Profile;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -58,7 +56,7 @@ public class FriendFragment extends Fragment {
         adapter = new FriendListAdapter(getActivity(), dataList);
         ranking_list.setAdapter(adapter);
 
-        DataBaseManager.getInstance().getRanking(Profile.getCurrentProfile().getId());
+        //DataBaseManager.getInstance().getRanking(Profile.getCurrentProfile().getId());
 
         return v;
     }
@@ -79,7 +77,7 @@ public class FriendFragment extends Fragment {
     }
 
     @Subscribe
-    public void UserInfoEvent(UserInfoEvent userInfoEvent){
+    public void UserInfoArrayEvent(UserInfoArrayEvent userInfoEvent){
         if(userInfoEvent.isResult()){
             dataList.add(userInfoEvent.getDataList());
             adapter.setData(dataList);

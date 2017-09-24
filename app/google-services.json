@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "252004927252",
+    "firebase_url": "https://cigastop.firebaseio.com",
+    "project_id": "cigastop",
+    "storage_bucket": "cigastop.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:252004927252:android:5bc7dd26017f57ef",
+        "android_client_info": {
+          "package_name": "com.bug.cigastop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "252004927252-j8q0dgi66od7j7dsvd4sgmn5fc3msvmp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bug.cigastop",
+            "certificate_hash": "3c24cac827407f8649a67426742478dd4092abf7"
+          }
+        },
+        {
+          "client_id": "252004927252-citsejt3m00t6cmei7g4b9i2g3cjlgsv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0ZmHvBXHw5kkiCUouan2-xyonWJQKhPw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "252004927252-citsejt3m00t6cmei7g4b9i2g3cjlgsv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

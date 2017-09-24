@@ -5,9 +5,9 @@ import android.util.Log;
 import com.example.lenovo.cigastop.model.FriendDto;
 import com.example.lenovo.cigastop.model.RankingModel;
 import com.example.lenovo.cigastop.model.UserInfo;
+import com.example.lenovo.cigastop.model.UserInfoArrayEvent;
 import com.example.lenovo.cigastop.model.UserInfoEvent;
 import com.facebook.Profile;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -47,7 +47,7 @@ public class DataBaseManager {
                     UserInfo userInfo = dataSnapshot.getValue(UserInfo.class);
                     infoArrayList.add(userInfo);
                     if(infoArrayList.size() == dataList.size())
-                        EventBus.getDefault().post(new UserInfoEvent(true, infoArrayList));
+                        EventBus.getDefault().post(new UserInfoArrayEvent(true, infoArrayList));
                 }
 
                 @Override
@@ -64,7 +64,7 @@ public class DataBaseManager {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     UserInfo userInfo = dataSnapshot.getValue(UserInfo.class);
-                    Log.d("name", userInfo.getName());
+                    EventBus.getDefault().post(new UserInfoEvent(true, userInfo));
                 }
 
                 @Override

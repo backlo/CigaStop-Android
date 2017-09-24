@@ -10,16 +10,17 @@ public class UserInfo {
     private String email;
     private String gender;
     private int count;
+    private int today;
+    private int remind;
 
-    public UserInfo() {
-    }
-
-    public UserInfo(String id, String name, String email, String gender, int count) {
+    public UserInfo(String id, String name, String email, String gender, int count, int today, int remind) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.gender = gender;
         this.count = count;
+        this.today = today;
+        this.remind = remind;
     }
 
     public String getId() {
@@ -60,5 +61,21 @@ public class UserInfo {
 
     public void setCount(int count) {
         this.count = count;
+    }
+
+    public int getToday(){
+        return today;
+    }
+
+    public void setToday(int today){
+        this.today = today;
+    }
+
+    public int getRemind(){
+        return remind;
+    }
+
+    public void setRemind(int remind){
+        this.remind = remind;
     }
 }

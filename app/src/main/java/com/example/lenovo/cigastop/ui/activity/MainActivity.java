@@ -71,5 +71,7 @@ public class MainActivity extends AppCompatActivity {
         btn_home.setOnClickListener(tabOnclick);
         btn_friend.setOnClickListener(tabOnclick);
         btn_setting.setOnClickListener(tabOnclick);
+
+        DataBaseManager.getInstance().getUserInfo(Profile.getCurrentProfile().getId());
     }
 }

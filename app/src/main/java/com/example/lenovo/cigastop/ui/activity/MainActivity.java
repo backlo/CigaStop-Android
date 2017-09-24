@@ -8,6 +8,8 @@ import android.widget.ImageView;
 
 import com.example.lenovo.cigastop.ui.adapter.PagerAdapter;
 import com.example.lenovo.cigastop.R;
+import com.example.lenovo.cigastop.util.DataBaseManager;
+import com.facebook.Profile;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -69,6 +71,5 @@ public class MainActivity extends AppCompatActivity {
         btn_home.setOnClickListener(tabOnclick);
         btn_friend.setOnClickListener(tabOnclick);
         btn_setting.setOnClickListener(tabOnclick);
-
     }
 }

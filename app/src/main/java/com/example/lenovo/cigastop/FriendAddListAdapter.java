@@ -31,7 +31,9 @@ public class FriendAddListAdapter extends BaseAdapter {
         this.context = context;
         this.dataList = dataList;
         inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        //for(int i = 0; i )
+        checkList = new ArrayList<>();
+        for(int i = 0; i < dataList.size(); i++)
+            checkList.add(false);
     }
 
     @Override

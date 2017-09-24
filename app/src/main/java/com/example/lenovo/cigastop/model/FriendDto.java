@@ -1,8 +1,7 @@
-package com.example.lenovo.cigastop;
+package com.example.lenovo.cigastop.model;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.ArrayList;
 
 /**
  * Created by trycatch on 2017. 9. 23..
@@ -28,7 +27,7 @@ public class FriendDto {
         return id;
     }
 
-    class Picture{
+    public class Picture{
         @SerializedName("data")
         private Data data;
 
@@ -37,7 +36,7 @@ public class FriendDto {
         }
     }
 
-    class Data{
+    public class Data{
         @SerializedName("is_silhouette")
         private boolean is_silhouette;
         @SerializedName("url")

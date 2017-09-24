@@ -1,25 +1,20 @@
-package com.example.lenovo.cigastop;
+package com.example.lenovo.cigastop.ui.fragment;
 
 import android.content.Intent;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 
-import com.facebook.AccessToken;
-import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.example.lenovo.cigastop.R;
+import com.example.lenovo.cigastop.model.FriendAddEvent;
+import com.example.lenovo.cigastop.ui.activity.FriendAddActivity;
 
-import org.json.JSONArray;
-
-import java.util.ArrayList;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,6 +29,8 @@ public class FriendFragment extends Fragment {
 
         ButterKnife.bind(this, v);
 
+        EventBus.getDefault().register(this);
+
         friend_add_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -42,5 +39,20 @@ public class FriendFragment extends Fragment {
         });
 
         return v;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe
+    public void FriendAddEvent(FriendAddEvent friendAddEvent){
+        if(friendAddEvent.isResult()){
+            if(friendAddEvent.getDataList() != null){
+                Log.i("name", friendAddEvent.getDataList().get(0).getName());
+            }
+        }
     }
 }

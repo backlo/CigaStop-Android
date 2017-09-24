@@ -1,4 +1,4 @@
-package com.example.lenovo.cigastop;
+package com.example.lenovo.cigastop.ui.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,9 +9,10 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.lenovo.cigastop.R;
+import com.example.lenovo.cigastop.model.FriendDto;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,15 +26,15 @@ public class FriendAddListAdapter extends BaseAdapter {
     private Context context;
     private LayoutInflater inflater;
     private ArrayList<FriendDto> dataList;
-    private ArrayList<Boolean> checkList;
+    private boolean checkList[];
 
     public FriendAddListAdapter(Context context, ArrayList<FriendDto> dataList) {
         this.context = context;
         this.dataList = dataList;
         inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        checkList = new ArrayList<>();
-        for(int i = 0; i < dataList.size(); i++)
-            checkList.add(false);
+        checkList = new boolean[dataList.size()];
+        for(int i = 0; i < checkList.length; i++)
+            checkList[i] = false;
     }
 
     @Override
@@ -65,13 +66,30 @@ public class FriendAddListAdapter extends BaseAdapter {
 
         Glide.with(context).load(dataList.get(position).getPicture().getData().getUrl()).into(viewHolder.profile_image);
         viewHolder.profile_name.setText(dataList.get(position).getName());
+        viewHolder.profile_check.setChecked(checkList[position]);
 
         return convertView;
     }
 
     public void addData(ArrayList<FriendDto> dataList){
         this.dataList = dataList;
+        checkList = new boolean[dataList.size()];
+        for(int i = 0; i < checkList.length; i++)
+            checkList[i] = false;
         notifyDataSetChanged();
+    }
+
+    public void clickItem(int position){
+        checkList[position] = !checkList[position];
+        notifyDataSetChanged();
+    }
+
+    public ArrayList<FriendDto> getClickItem(){
+        ArrayList<FriendDto> friendDtos = new ArrayList<>();
+        for(int i = 0; i < checkList.length; i++)
+            if(checkList[i])
+                friendDtos.add(dataList.get(i));
+        return friendDtos;
     }
 
     class ViewHolder{

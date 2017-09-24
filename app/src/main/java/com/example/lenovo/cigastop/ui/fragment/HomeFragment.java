@@ -1,4 +1,4 @@
-package com.example.lenovo.cigastop;
+package com.example.lenovo.cigastop.ui.fragment;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -14,6 +14,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.lenovo.cigastop.R;
 
 import java.io.IOException;
 import java.io.InputStream;

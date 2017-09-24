@@ -1,4 +1,4 @@
-package com.example.lenovo.cigastop;
+package com.example.lenovo.cigastop.ui.adapter;
 
 import android.view.View;
 import android.view.ViewGroup;

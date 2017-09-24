@@ -1,4 +1,4 @@
-package com.example.lenovo.cigastop;
+package com.example.lenovo.cigastop.ui.adapter;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -6,6 +6,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.view.ViewGroup;
+
+import com.example.lenovo.cigastop.ui.fragment.FriendFragment;
+import com.example.lenovo.cigastop.ui.fragment.HomeFragment;
+import com.example.lenovo.cigastop.ui.fragment.SettingFragment;
 
 /**
  * Created by trycatch on 2017. 9. 20..

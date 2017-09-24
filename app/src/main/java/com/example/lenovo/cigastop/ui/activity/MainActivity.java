@@ -1,10 +1,13 @@
-package com.example.lenovo.cigastop;
+package com.example.lenovo.cigastop.ui.activity;
 
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+
+import com.example.lenovo.cigastop.ui.adapter.PagerAdapter;
+import com.example.lenovo.cigastop.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

@@ -24,17 +24,17 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="40dp"
                 android:layout_marginTop="20dp"
-                android:text="케이스 Loading..."
+                android:text="케이스 Loading...    "
                 android:textColor="#000000"
                 android:textSize="30sp"
                 android:textStyle="bold" />
 
             <Button
                 android:id="@+id/open"
-                android:layout_width="wrap_content"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="open" />
+                android:background="@drawable/lock"/>
 
         </LinearLayout>
 
@@ -124,6 +124,11 @@
         android:layout_height="150dp"
         android:orientation="horizontal">
 
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="#d8d8d8" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -134,15 +139,16 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1"
+                android:text="0"
                 android:textColor="#000000"
                 android:textSize="60sp"
+                android:id="@+id/limitciga"
                 android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="교체한 담뱃갑"
+                android:text="오늘 필 갯수"
                 android:textColor="#000000"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -164,10 +170,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="13"
+                android:text="0"
                 android:textColor="#000000"
                 android:textSize="60sp"
-                android:id="@+id/ciga"
+                android:id="@+id/todayciga"
                 android:textStyle="bold" />
 
             <TextView
@@ -195,7 +201,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="40"
+                android:text="0"
+                android:id="@+id/allciga"
                 android:textColor="#000000"
                 android:textSize="60sp"
                 android:textStyle="bold" />
@@ -281,7 +288,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="16개"
+                    android:id="@+id/remindciga"
+                    android:text="0"
                     android:textColor="#000000"
                     android:textSize="22sp"
                     android:textStyle="bold" />
@@ -291,6 +299,5 @@
         </LinearLayout>
 
     </LinearLayout>
-
 
 </LinearLayout>

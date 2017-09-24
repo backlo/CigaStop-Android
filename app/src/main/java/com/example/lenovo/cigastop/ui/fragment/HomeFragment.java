@@ -6,9 +6,9 @@ import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -23,6 +23,7 @@ import java.io.OutputStream;
 import java.lang.reflect.Method;
 import java.util.UUID;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -36,13 +37,23 @@ public class HomeFragment extends Fragment {
 
     private BluetoothAdapter btAdapter = null;
     private BluetoothSocket btSocket = null;
-    private StringBuilder sb = new StringBuilder();
 
-    Handler h;
-    final int RECIEVE_MESSAGE = 1;
+    int todayCiga = 0;
+    int allCiga = 0;
+    int remindCiga = 20;
 
+    @BindView(R.id.open)
     Button onBtn;
-    TextView ciga;
+
+    @BindView(R.id.todayciga)
+    TextView todayciga;
+
+    @BindView(R.id.allciga)
+    TextView allciga;
+
+    @BindView(R.id.remindciga)
+    TextView remindciga;
+
     private ConnectedThread mConnectedThread;
     // SPP UUID service
     private static final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
@@ -51,9 +62,6 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this, v);
-
-        onBtn = (Button) v.findViewById(R.id.open);
-        ciga = (TextView) v.findViewById(R.id.ciga);
 
         btAdapter = BluetoothAdapter.getDefaultAdapter();       // get Bluetooth adapter
 
@@ -80,33 +88,25 @@ public class HomeFragment extends Fragment {
         }
 
         onBtn.setOnClickListener(new View.OnClickListener() {
+
+            private boolean check = false;
             public void onClick(View v) {
+                onBtn.setBackgroundResource(R.drawable.lock);
                 mConnectedThread.write("1");
                 Toast.makeText(getActivity(), "OPEN", Toast.LENGTH_SHORT).show();
+                todayCiga();
             }
         });
 
-        h = new Handler() {
-            public void handleMessage(android.os.Message msg) {
-                switch (msg.what) {
-                    case RECIEVE_MESSAGE:
-                        byte[] readBuf = (byte[]) msg.obj;
-                        String strIncom = new String(readBuf, 0, msg.arg1);
-                        sb.append(strIncom);
-                        int endOfLineIndex = sb.indexOf("\r\n");
-                        if (endOfLineIndex > 0) {
-                            String sbprint = sb.substring(0, endOfLineIndex);
-                            sb.delete(0, sb.length());
-                            ciga.setText(strIncom);
-
-                        }
-                        break;
+        onBtn.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    onBtn.setBackgroundResource(R.drawable.clicklock);
                 }
+                return false;
             }
-
-            ;
-        };
-
+        });
 
         return v;
     }
@@ -124,8 +124,6 @@ public class HomeFragment extends Fragment {
 
     public void onResume() {
         super.onResume();
-
-
     }
 
     @Override
@@ -133,6 +131,29 @@ public class HomeFragment extends Fragment {
         super.onPause();
         try {
             btSocket.close();
+            btAdapter = BluetoothAdapter.getDefaultAdapter();       // get Bluetooth adapter
+
+            if (checkBTState()) {
+                BluetoothDevice device = btAdapter.getRemoteDevice(address);
+                try {
+                    btSocket = createBluetoothSocket(device);
+                } catch (Exception e) {
+                }
+                btAdapter.cancelDiscovery();
+
+                try {
+                    btSocket.connect();
+                } catch (Exception e) {
+                    try {
+                        btSocket.close();
+                    } catch (Exception e2) {
+                    }
+                }
+
+                mConnectedThread = new ConnectedThread(btSocket);
+                mConnectedThread.start();
+            }
+            Toast.makeText(getActivity(), "켜짐", Toast.LENGTH_SHORT).show();
         } catch (Exception e2) {
         }
     }
@@ -143,9 +164,11 @@ public class HomeFragment extends Fragment {
             return false;
         } else {
             if (btAdapter.isEnabled()) {
+                Toast.makeText(getActivity(), "블루투스 켜짐", Toast.LENGTH_SHORT).show();
             } else {
                 //Prompt user to turn on Bluetooth
                 Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+                Toast.makeText(getActivity(), "블루투스 꺼져있음", Toast.LENGTH_SHORT).show();
                 startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
 
             }
@@ -178,6 +201,29 @@ public class HomeFragment extends Fragment {
             } catch (Exception e) {
             }
         }
+
+    }
+
+    public void todayCiga() {
+        ++todayCiga;
+        ++allCiga;
+        --remindCiga;
+
+        todayciga.setText(String.valueOf(todayCiga));
+        if (todayCiga == 20) {
+            todayCiga = 0;
+        }
+
+        allciga.setText(String.valueOf(allCiga));
+        if (allCiga >= 1000) {
+            allciga.setTextSize(40);
+        }
+
+        remindciga.setText(String.valueOf(remindCiga));
+        if(remindCiga == 0){
+            remindCiga = 20;
+        }
+
     }
 
 }

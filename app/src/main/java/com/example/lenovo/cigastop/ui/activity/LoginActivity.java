@@ -60,13 +60,13 @@ public class LoginActivity extends AppCompatActivity {
                             DataBaseManager.getInstance().setUserInfo(new UserInfo(object.getString("id"), object.getString("name"), object.getString("email"), object.getString("gender"), 0, 0, 0));
                         } catch (JSONException e) {
                             e.printStackTrace();
-                    }
+                        }
                         startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     }
                 });
 
                 Bundle parameters = new Bundle();
-                parameters.putString("fields", "id,name,email,gender,birthday,");
+                parameters.putString("fields", "id,name,email,gender,birthday");
                 graphRequest.setParameters(parameters);
                 graphRequest.executeAsync();
             }

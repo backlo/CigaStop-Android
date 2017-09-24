@@ -72,11 +72,11 @@ public class HomeFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this, v);
 
+        EventBus.getDefault().register(this);
+
         DataBaseManager.getInstance().getUserInfo(Profile.getCurrentProfile().getId());
 
         btAdapter = BluetoothAdapter.getDefaultAdapter();       // get Bluetooth adapter
-
-        EventBus.getDefault().register(this);
 
         if (checkBTState()) {
             BluetoothDevice device = btAdapter.getRemoteDevice(address);
@@ -248,7 +248,6 @@ public class HomeFragment extends Fragment {
     @Subscribe
     public void UserInfoEvent(UserInfoEvent userInfoEvent) {
         if (userInfoEvent.isResult()) {
-
             userInfo = userInfoEvent.getUserInfo();
             allCiga = userInfo.getCount();
             allciga.setText(allCiga + "");
@@ -259,7 +258,6 @@ public class HomeFragment extends Fragment {
             remindCiga = userInfo.getRemind();
             remindciga.setText(remindCiga + "");
         }
-
     }
 
     @Override

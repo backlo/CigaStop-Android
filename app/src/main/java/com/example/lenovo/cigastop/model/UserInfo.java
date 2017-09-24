@@ -13,6 +13,9 @@ public class UserInfo {
     private int today;
     private int remind;
 
+    public UserInfo() {
+    }
+
     public UserInfo(String id, String name, String email, String gender, int count, int today, int remind) {
         this.id = id;
         this.name = name;

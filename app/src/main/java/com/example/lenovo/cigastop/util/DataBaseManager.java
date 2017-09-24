@@ -59,7 +59,6 @@ public class DataBaseManager {
     }
 
     public void getUserInfo(String id){
-        final ArrayList<UserInfo> infoArrayList = new ArrayList<>();
         userRef.child(id).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {

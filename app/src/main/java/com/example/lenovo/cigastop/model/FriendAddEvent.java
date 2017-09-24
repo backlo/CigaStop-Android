@@ -7,8 +7,8 @@ import java.util.ArrayList;
  */
 
 public class FriendAddEvent {
-    boolean result;
-    ArrayList<FriendDto> dataList;
+    private boolean result;
+    private ArrayList<FriendDto> dataList;
 
     public FriendAddEvent(boolean result, ArrayList<FriendDto> dataList) {
         this.result = result;

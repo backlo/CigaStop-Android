@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.example.lenovo.cigastop.R;
+import com.example.lenovo.cigastop.model.UserInfo;
+import com.example.lenovo.cigastop.util.DataBaseManager;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -17,6 +19,7 @@ import com.facebook.login.LoginBehavior;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Arrays;
@@ -53,6 +56,11 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onCompleted(JSONObject object, GraphResponse response) {
                         Log.v("result",object.toString());
+                        try {
+                            DataBaseManager.getInstance().setUserInfo(new UserInfo(object.getString("id"), object.getString("name"), object.getString("email"), object.getString("gender"), 0));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                         startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     }
                 });

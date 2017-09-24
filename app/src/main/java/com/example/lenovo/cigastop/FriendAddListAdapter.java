@@ -31,7 +31,7 @@ public class FriendAddListAdapter extends BaseAdapter {
         this.context = context;
         this.dataList = dataList;
         inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        for(int i = 0; i )
+        //for(int i = 0; i )
     }
 
     @Override

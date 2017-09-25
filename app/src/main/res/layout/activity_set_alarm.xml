@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.lenovo.cigastop.ui.activity.SetAlarmActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/backbtn"
+            android:layout_width="77dp"
+            android:layout_height="67dp"
+            android:src="@mipmap/backarrow" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="알림 설정"
+            android:textSize="30dp"
+            android:textColor="#000"
+            android:gravity="center"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <Switch
+            android:id="@+id/switch1"
+            android:layout_width="189dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:textOff="off"
+            android:textOn="on"
+            android:text="알림 받기"
+            android:textSize="28dp" />
+
+        <Switch
+            android:id="@+id/switch2"
+            android:layout_width="189dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:textOff="off"
+            android:textOn="on"
+            android:text="진동"
+            android:textSize="28dp" />
+
+
+        <Switch
+            android:id="@+id/switch3"
+            android:layout_width="189dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:textOff="off"
+            android:textOn="on"
+            android:text="무음"
+            android:textSize="28dp" />
+
+
+    </LinearLayout>
+
+</LinearLayout>
+

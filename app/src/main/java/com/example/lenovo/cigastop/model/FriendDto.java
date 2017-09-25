@@ -34,7 +34,6 @@ public class FriendDto {
     public class Picture{
         @SerializedName("data")
         private Data data;
-
         public Data getData() {
             return data;
         }

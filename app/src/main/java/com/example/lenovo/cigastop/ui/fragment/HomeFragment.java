@@ -13,17 +13,16 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.lenovo.cigastop.R;
 import com.example.lenovo.cigastop.model.UserInfo;
 import com.example.lenovo.cigastop.model.UserInfoEvent;
-import com.example.lenovo.cigastop.ui.activity.SetCigaActivity;
 import com.example.lenovo.cigastop.util.DataBaseManager;
 import com.example.lenovo.cigastop.util.Util;
 import com.facebook.Profile;
-import com.example.lenovo.cigastop.ui.activity.SetCigaActivity;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -53,6 +52,7 @@ public class HomeFragment extends Fragment {
     int todayCiga = 0;
     int allCiga = 0;
     int remindCiga = 20;
+    double calcul = 0;
 
     @BindView(R.id.open)
     Button onBtn;
@@ -68,6 +68,12 @@ public class HomeFragment extends Fragment {
 
     @BindView(R.id.settingciga)
     TextView settingciga;
+
+    @BindView(R.id.goaltext)
+    TextView goal;
+
+    @BindView(R.id.breath)
+    ImageView breath;
 
     private ConnectedThread mConnectedThread;
     // SPP UUID service
@@ -127,6 +133,8 @@ public class HomeFragment extends Fragment {
             }
         });
 
+
+
         return v;
     }
 
@@ -145,7 +153,7 @@ public class HomeFragment extends Fragment {
         super.onResume();
     }
 
-   // @Override
+    // @Override
     public void onPause() {
         super.onPause();
         /*try {
@@ -254,6 +262,7 @@ public class HomeFragment extends Fragment {
     @Subscribe
     public void UserInfoEvent(UserInfoEvent userInfoEvent) {
         if (userInfoEvent.isResult()) {
+
             userInfo = userInfoEvent.getUserInfo();
             allCiga = userInfo.getCount();
             allciga.setText(allCiga + "");
@@ -265,6 +274,26 @@ public class HomeFragment extends Fragment {
             remindciga.setText(remindCiga + "");
 
             settingciga.setText(userInfo.getSettingciga() + "");
+
+            if (userInfo.getToday() != 0 && userInfo.getToday() > userInfo.getSettingciga()) {
+                calcul = (double)userInfo.getToday() / (double)userInfo.getSettingciga();
+                Log.d("Calcul", calcul + ", " + userInfo.getToday() + ", " + userInfo.getSettingciga());
+                goal.setText("오늘은 목표치보다 \n" + calcul + "배 더 피셨네요 ㅡㅡ");
+                breath.setBackgroundResource(R.drawable.the_first);
+
+            }
+            else if (userInfo.getToday() == userInfo.getSettingciga()){
+                goal.setText("오늘은 일정량만 \n 피셨네요!");
+                breath.setBackgroundResource(R.drawable.the_second);
+            }
+            else if(userInfo.getToday() == 0){
+                breath.setBackgroundResource(R.drawable.the_fourth);
+            }
+            else{
+                calcul = (double)userInfo.getToday() / (double)userInfo.getSettingciga();
+                goal.setText("오늘은 목표치보다 \n" + calcul + "배 덜 피셨네요 ^^");
+                breath.setBackgroundResource(R.drawable.the_third);
+            }
 
             Util.getInstance().setUserInfo(userInfo);
         }

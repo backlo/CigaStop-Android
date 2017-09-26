@@ -237,11 +237,11 @@
         android:gravity="center">
 
         <ImageView
-            android:layout_width="60dp"
-            android:layout_height="100dp"
+            android:layout_width="80dp"
+            android:layout_height="90dp"
             android:layout_marginRight="50dp"
             android:scaleType="fitXY"
-            android:src="@drawable/battery" />
+            android:id="@+id/breath" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -257,16 +257,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="배터리 잔량 : "
                     android:textColor="#000000"
-                    android:textSize="22sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="100%"
-                    android:textColor="#000000"
+                    android:id="@+id/goaltext"
                     android:textSize="22sp"
                     android:textStyle="bold" />
 
@@ -289,7 +281,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/remindciga"
-                    android:text="0"
                     android:textColor="#000000"
                     android:textSize="22sp"
                     android:textStyle="bold" />

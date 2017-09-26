@@ -57,7 +57,7 @@ public class LoginActivity extends AppCompatActivity {
                     public void onCompleted(JSONObject object, GraphResponse response) {
                         Log.v("result",object.toString());
                         try {
-                            DataBaseManager.getInstance().setUserInfo(new UserInfo(object.getString("id"), object.getString("name"), object.getString("email"), object.getString("gender"), 0, 0, 0));
+                            DataBaseManager.getInstance().setUserInfo(new UserInfo(object.getString("id"), object.getString("name"), object.getString("email"), object.getString("gender"), 0, 0, 0,0) );
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

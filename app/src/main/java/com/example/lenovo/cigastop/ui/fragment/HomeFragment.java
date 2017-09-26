@@ -19,8 +19,10 @@ import android.widget.Toast;
 import com.example.lenovo.cigastop.R;
 import com.example.lenovo.cigastop.model.UserInfo;
 import com.example.lenovo.cigastop.model.UserInfoEvent;
+import com.example.lenovo.cigastop.ui.activity.SetCigaActivity;
 import com.example.lenovo.cigastop.util.DataBaseManager;
 import com.facebook.Profile;
+import com.example.lenovo.cigastop.ui.activity.SetCigaActivity;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -46,6 +48,8 @@ public class HomeFragment extends Fragment {
     private BluetoothAdapter btAdapter = null;
     private BluetoothSocket btSocket = null;
     private UserInfo userInfo = null;
+
+    //SetCigaActivity setCigaActivity = new SetCigaActivity();
 
     int todayCiga = 0;
     int allCiga = 0;
@@ -139,10 +143,10 @@ public class HomeFragment extends Fragment {
         super.onResume();
     }
 
-    @Override
+   // @Override
     public void onPause() {
         super.onPause();
-        try {
+        /*try {
             btSocket.close();
             btAdapter = BluetoothAdapter.getDefaultAdapter();       // get Bluetooth adapter
 
@@ -168,7 +172,7 @@ public class HomeFragment extends Fragment {
             }
             Toast.makeText(getActivity(), "켜짐", Toast.LENGTH_SHORT).show();
         } catch (Exception e2) {
-        }
+        }*/
     }
 
     private boolean checkBTState() {
@@ -257,6 +261,9 @@ public class HomeFragment extends Fragment {
 
             remindCiga = userInfo.getRemind();
             remindciga.setText(remindCiga + "");
+
+          /*  setCigaActivity.setCiga = userInfo.getSettingciga();
+            setCigaActivity.settingciga.setText(setCigaActivity.setCiga+"");*/
         }
     }
 

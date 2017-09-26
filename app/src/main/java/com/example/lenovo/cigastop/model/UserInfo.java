@@ -12,11 +12,12 @@ public class UserInfo {
     private int count;
     private int today;
     private int remind;
+    private int settingciga;
 
     public UserInfo() {
     }
 
-    public UserInfo(String id, String name, String email, String gender, int count, int today, int remind) {
+    public UserInfo(String id, String name, String email, String gender, int count, int today, int remind, int settingciga) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -24,6 +25,7 @@ public class UserInfo {
         this.count = count;
         this.today = today;
         this.remind = remind;
+        this.settingciga = settingciga;
     }
 
     public String getId() {
@@ -80,5 +82,13 @@ public class UserInfo {
 
     public void setRemind(int remind){
         this.remind = remind;
+    }
+
+    public int getSettingciga(){
+        return settingciga;
+    }
+
+    public void setSettingciga(int settingciga){
+        this.settingciga = settingciga;
     }
 }

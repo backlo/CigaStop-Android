@@ -8,11 +8,21 @@ import android.widget.TimePicker;
 
 import com.example.lenovo.cigastop.R;
 
+import butterknife.BindView;
+
 
 public class SetTimeActivity extends AppCompatActivity {
-    ImageView imageView;
+
+    @BindView(R.id.backbtn)
+    ImageView backbtn;
+
+    @BindView(R.id.hours)
     TimePicker hourPicker;
+
+    @BindView(R.id.minutes)
     TimePicker minutePicker;
+
+    @BindView(R.id.seconds)
     TimePicker SecondPicker;
 
 
@@ -20,12 +30,13 @@ public class SetTimeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set_time);
-        imageView = (ImageView)findViewById(R.id.backbtn);
-        imageView.setOnClickListener(new View.OnClickListener() {
+
+        backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
+
     }
 }

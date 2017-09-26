@@ -1,5 +1,8 @@
 package com.example.lenovo.cigastop.ui.fragment;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
@@ -7,6 +10,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -81,8 +85,26 @@ public class HomeFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         View v = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this, v);
+
+
+//        Intent intent = getIntent();
+//        int ciga = intent.getExtras().getInt("setciga");
+
+        final NotificationManager nm = (NotificationManager)getContext().getSystemService(getContext().NOTIFICATION_SERVICE);
+        PendingIntent pendingIntent = PendingIntent.getActivity(getContext(), 0 , new Intent(getContext(), getClass()),PendingIntent.FLAG_UPDATE_CURRENT);
+
+        final NotificationCompat.Builder mCompatBuilder = new NotificationCompat.Builder(getContext());
+        mCompatBuilder.setSmallIcon(R.mipmap.ciga);
+        mCompatBuilder.setContentTitle("담배");
+        mCompatBuilder.setContentText("담배");
+        mCompatBuilder.setWhen(System.currentTimeMillis());
+        mCompatBuilder.setDefaults(Notification.DEFAULT_SOUND | Notification.DEFAULT_VIBRATE);
+        mCompatBuilder.setContentIntent(pendingIntent);
+        mCompatBuilder.setAutoCancel(true);
+
 
         EventBus.getDefault().register(this);
 
@@ -106,7 +128,6 @@ public class HomeFragment extends Fragment {
                 } catch (Exception e2) {
                 }
             }
-
             mConnectedThread = new ConnectedThread(btSocket);
             mConnectedThread.start();
         }
@@ -119,6 +140,7 @@ public class HomeFragment extends Fragment {
                 onBtn.setBackgroundResource(R.drawable.lock);
                 mConnectedThread.write("1");
                 Toast.makeText(getActivity(), "OPEN", Toast.LENGTH_SHORT).show();
+                nm.notify(0,mCompatBuilder.build());
                 todayCiga();
             }
         });
@@ -200,6 +222,8 @@ public class HomeFragment extends Fragment {
             return true;
         }
     }
+
+
 
     private class ConnectedThread extends Thread {
         private final InputStream mmInStream;

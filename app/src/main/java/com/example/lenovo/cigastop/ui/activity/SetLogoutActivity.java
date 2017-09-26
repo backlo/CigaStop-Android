@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.example.lenovo.cigastop.R;
+import com.facebook.AccessToken;
+import com.facebook.login.LoginManager;
 
 
 public class SetLogoutActivity extends AppCompatActivity {
@@ -16,16 +18,19 @@ public class SetLogoutActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set_logout);
 
-        imageView = (ImageView)findViewById(R.id.backbtn);
+        imageView = (ImageView) findViewById(R.id.backbtn);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if (AccessToken.getCurrentAccessToken() != null) {
+                    LoginManager.getInstance().logOut();
+                }
+
                 finish();
             }
         });
 
-
-
-
     }
 }
+

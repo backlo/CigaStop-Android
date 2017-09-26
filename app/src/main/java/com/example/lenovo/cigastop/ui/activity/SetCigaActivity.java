@@ -12,21 +12,21 @@ import android.widget.Toast;
 import com.example.lenovo.cigastop.R;
 import com.example.lenovo.cigastop.model.UserInfo;
 import com.example.lenovo.cigastop.model.UserInfoEvent;
+import com.example.lenovo.cigastop.util.DataBaseManager;
+import com.example.lenovo.cigastop.util.Util;
 
 import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class SetCigaActivity extends AppCompatActivity {
 
-    //@BindView(R.id.backbtn)
+    @BindView(R.id.backbtn)
     ImageView backbtn;
 
-    //@BindView(R.id.ciganum)
+    @BindView(R.id.ciganum)
     NumberPicker numberPicker;
-
-    @BindView(R.id.settingciga)
-    TextView settingciga;
 
     int setCiga;
 
@@ -36,11 +36,18 @@ public class SetCigaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set_ciga);
 
+        ButterKnife.bind(this);
+
         backbtn = (ImageView)findViewById(R.id.backbtn);
         backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                UserInfo info = Util.getInstance().getUserInfo();
+                if(info != null) {
+                    info.setSettingciga(setCiga);
+                    DataBaseManager.getInstance().setUserInfo(info);
+                    finish();
+                }
             }
         });
 
@@ -57,11 +64,8 @@ public class SetCigaActivity extends AppCompatActivity {
                 Intent intent= new Intent();
                 intent.putExtra("todayciga",newVal);*/
                 setCiga = newVal;
-                Toast.makeText(getApplicationContext(), setCiga, Toast.LENGTH_SHORT).show();
             }
         });
 
     }
-
-
 }

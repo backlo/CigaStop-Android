@@ -21,6 +21,7 @@ import com.example.lenovo.cigastop.model.UserInfo;
 import com.example.lenovo.cigastop.model.UserInfoEvent;
 import com.example.lenovo.cigastop.ui.activity.SetCigaActivity;
 import com.example.lenovo.cigastop.util.DataBaseManager;
+import com.example.lenovo.cigastop.util.Util;
 import com.facebook.Profile;
 import com.example.lenovo.cigastop.ui.activity.SetCigaActivity;
 
@@ -49,8 +50,6 @@ public class HomeFragment extends Fragment {
     private BluetoothSocket btSocket = null;
     private UserInfo userInfo = null;
 
-    //SetCigaActivity setCigaActivity = new SetCigaActivity();
-
     int todayCiga = 0;
     int allCiga = 0;
     int remindCiga = 20;
@@ -66,6 +65,9 @@ public class HomeFragment extends Fragment {
 
     @BindView(R.id.remindciga)
     TextView remindciga;
+
+    @BindView(R.id.settingciga)
+    TextView settingciga;
 
     private ConnectedThread mConnectedThread;
     // SPP UUID service
@@ -262,8 +264,9 @@ public class HomeFragment extends Fragment {
             remindCiga = userInfo.getRemind();
             remindciga.setText(remindCiga + "");
 
-          /*  setCigaActivity.setCiga = userInfo.getSettingciga();
-            setCigaActivity.settingciga.setText(setCigaActivity.setCiga+"");*/
+            settingciga.setText(userInfo.getSettingciga() + "");
+
+            Util.getInstance().setUserInfo(userInfo);
         }
     }
 

@@ -36,8 +36,9 @@ public class DataBaseManager {
         rankingRef = database.getReference("ranking");
     }
 
-    public void setUserInfo(UserInfo userInfo){
+    public void setUserInfo(final UserInfo userInfo){
         userRef.child(userInfo.getId()).setValue(userInfo);
+        EventBus.getDefault().post(new UserInfoEvent(true, userInfo));
     }
 
     public void getUserInfo(final ArrayList<FriendDto> dataList){

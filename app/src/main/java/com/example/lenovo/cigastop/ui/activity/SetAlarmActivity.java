@@ -1,10 +1,8 @@
 package com.example.lenovo.cigastop.ui.activity;
 
-import android.app.NotificationManager;
 import android.content.Context;
 import android.media.AudioManager;
 import android.os.Bundle;
-import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -30,11 +28,10 @@ public class SetAlarmActivity extends AppCompatActivity {
         bSwitch = (Switch)findViewById(R.id.switch2);
         cSwitch = (Switch)findViewById(R.id.switch3);
 
-        final NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(SetAlarmActivity.this)
-                .setSmallIcon(R.mipmap.ciga)
-                .setContentTitle("담배")
-                .setContentTitle("담배");
-        final NotificationManager notificationManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+
+
+
+
 
         imageView = (ImageView)findViewById(R.id.backbtn);
         imageView.setOnClickListener(new View.OnClickListener() {
@@ -48,9 +45,6 @@ public class SetAlarmActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked == true){
-
-                   // NotificationManager notificationManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
-                    notificationManager.notify(0,mBuilder.build());
 
                 }
                 else{

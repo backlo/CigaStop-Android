@@ -63,11 +63,16 @@ public class SetAlarmActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked == true){
+                    if(am.getRingerMode()==0){
+                        am.setRingerMode(AudioManager.RINGER_MODE_VIBRATE);
+                    }
+                    else if(am.getRingerMode()==2)
+                        am.setRingerMode(AudioManager.RINGER_MODE_VIBRATE);
 
                 }
                 else{
                     am = (AudioManager)getBaseContext().getSystemService(Context.AUDIO_SERVICE);
-                    am.setRingerMode(AudioManager.RINGER_MODE_VIBRATE);
+                    am.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
 
                 }
             }
@@ -78,12 +83,17 @@ public class SetAlarmActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked == true){
-
+                    if(am.getRingerMode() ==1){
+                        am.setRingerMode(AudioManager.RINGER_MODE_SILENT);
+                    }
+                    else if(am.getRingerMode() ==2){
+                        am.setRingerMode(AudioManager.RINGER_MODE_SILENT);
+                    }
 
                 }
                 else{
                     am= (AudioManager) getBaseContext().getSystemService(Context.AUDIO_SERVICE);
-                    am.setRingerMode(AudioManager.RINGER_MODE_SILENT);
+                    am.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
 
                 }
             }

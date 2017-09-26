@@ -9,7 +9,10 @@
         android:layout_height="65dp"
         android:gravity="center"
         android:text="Setting"
-        android:textSize="30dp"
+        android:textSize="38sp"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
         android:textColor="#000"/>
 
 </LinearLayout>

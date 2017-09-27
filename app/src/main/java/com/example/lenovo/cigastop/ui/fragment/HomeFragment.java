@@ -9,6 +9,8 @@ import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
@@ -22,6 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.lenovo.cigastop.R;
+import com.example.lenovo.cigastop.model.Time;
 import com.example.lenovo.cigastop.model.UserInfo;
 import com.example.lenovo.cigastop.model.UserInfoEvent;
 import com.example.lenovo.cigastop.util.DataBaseManager;
@@ -35,6 +38,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.reflect.Method;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.UUID;
 
 import butterknife.BindView;
@@ -61,6 +69,15 @@ public class HomeFragment extends Fragment {
     @BindView(R.id.open)
     Button onBtn;
 
+    @BindView(R.id.hours)
+    TextView hours;
+
+    @BindView(R.id.minutes)
+    TextView minutes;
+
+    @BindView(R.id.seconds)
+    TextView seconds;
+
     @BindView(R.id.todayciga)
     TextView todayciga;
 
@@ -82,6 +99,10 @@ public class HomeFragment extends Fragment {
     private ConnectedThread mConnectedThread;
     // SPP UUID service
     private static final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
+    private Time time;
+    private TimerTask timerTask;
+    private Timer timer;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -138,7 +159,7 @@ public class HomeFragment extends Fragment {
 
             public void onClick(View v) {
                 onBtn.setBackgroundResource(R.drawable.lock);
-                mConnectedThread.write("1");
+                //mConnectedThread.write("1");
                 Toast.makeText(getActivity(), "OPEN", Toast.LENGTH_SHORT).show();
                 nm.notify(0,mCompatBuilder.build());
                 todayCiga();
@@ -261,6 +282,8 @@ public class HomeFragment extends Fragment {
         userInfo.setCount(allCiga);
         userInfo.setToday(todayCiga);
         userInfo.setRemind(remindCiga);
+        userInfo.setCoolTime(1, 30, 00);
+        userInfo.setTime(Util.getInstance().getCurTime() + userInfo.getCoolTime());
 
         DataBaseManager.getInstance().setUserInfo(userInfo);
 
@@ -318,6 +341,80 @@ public class HomeFragment extends Fragment {
             }
 
             Util.getInstance().setUserInfo(userInfo);
+
+            time = Util.getInstance().getRemainTime();
+            setTime(time.getHour(), time.getMinute(), time.getSecond());
+
+            if(timerTask != null)
+                timerTask.cancel();
+            if(!time.isClear()){
+                onBtn.setVisibility(View.INVISIBLE);
+                timerTask = new TimerTask() {
+                    @Override
+                    public void run() {
+                        long hour = time.getHour();
+                        long minute = time.getMinute();
+                        long second = time.getSecond();
+                        if(second > 0){
+                            time.setSecond(--second);
+                        }
+                        else if(minute > 0){
+                            time.setMinute(--minute);
+                            second = 59;
+                            time.setSecond(second);
+                        }
+                        else if(hour > 0){
+                            time.setHour(--hour);
+                            minute = 59;
+                            second = 59;
+                            time.setMinute(minute);
+                            time.setSecond(second);
+                        }
+                        else{
+                            onBtn.setVisibility(View.VISIBLE);
+                            timerTask.cancel();
+                        }
+                        final long finalHour = hour;
+                        final long finalMinute = minute;
+                        final long finalSecond = second;
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                setTime(finalHour, finalMinute, finalSecond);
+                            }
+                        });
+                    }
+                };
+                timer = new Timer();
+                timer.schedule(timerTask, 1000, 1000);
+            }
+            else{
+                hours.setText("00");
+                minutes.setText("00");
+                seconds.setText("00");
+                onBtn.setVisibility(View.VISIBLE);
+            }
+        }
+    }
+
+    public void setTime(long hour, long minute, long second){
+        if(hour < 10){
+            hours.setText("0" + hour);
+        }
+        else{
+            hours.setText("" + hour);
+        }
+        if(minute < 10){
+            minutes.setText("0" + minute);
+        }
+        else{
+            minutes.setText("" + minute);
+        }
+        if(second < 10){
+            seconds.setText("0" + second);
+        }
+        else{
+            seconds.setText("" + second);
         }
     }
 
@@ -325,5 +422,6 @@ public class HomeFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         EventBus.getDefault().unregister(this);
+        timerTask.cancel();
     }
 }

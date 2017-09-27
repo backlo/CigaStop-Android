@@ -13,11 +13,13 @@ public class UserInfo {
     private int today;
     private int remind;
     private int settingciga;
+    private long time;
+    private long coolTime;
 
     public UserInfo() {
     }
 
-    public UserInfo(String id, String name, String email, String gender, int count, int today, int remind, int settingciga) {
+    public UserInfo(String id, String name, String email, String gender, int count, int today, int remind, int settingciga, long time, long coolTime) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -26,6 +28,8 @@ public class UserInfo {
         this.today = today;
         this.remind = remind;
         this.settingciga = settingciga;
+        this.time = time;
+        this.coolTime = coolTime;
     }
 
     public String getId() {
@@ -68,27 +72,43 @@ public class UserInfo {
         this.count = count;
     }
 
-    public int getToday(){
+    public int getToday() {
         return today;
     }
 
-    public void setToday(int today){
+    public void setToday(int today) {
         this.today = today;
     }
 
-    public int getRemind(){
+    public int getRemind() {
         return remind;
     }
 
-    public void setRemind(int remind){
+    public void setRemind(int remind) {
         this.remind = remind;
     }
 
-    public int getSettingciga(){
+    public int getSettingciga() {
         return settingciga;
     }
 
-    public void setSettingciga(int settingciga){
+    public void setSettingciga(int settingciga) {
         this.settingciga = settingciga;
+    }
+
+    public long getTime() {
+        return time;
+    }
+
+    public void setTime(long time) {
+        this.time = time;
+    }
+
+    public long getCoolTime() {
+        return coolTime;
+    }
+
+    public void setCoolTime(int hour, int minute, int second) {
+        this.coolTime = (hour * 60 * 60 * 1000) + (minute * 60 * 1000) + (second * 1000);
     }
 }

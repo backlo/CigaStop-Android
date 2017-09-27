@@ -26,6 +26,7 @@ import com.example.lenovo.cigastop.model.UserInfo;
 import com.example.lenovo.cigastop.model.UserInfoEvent;
 import com.example.lenovo.cigastop.util.DataBaseManager;
 import com.example.lenovo.cigastop.util.Util;
+import com.facebook.AccessToken;
 import com.facebook.Profile;
 
 import org.greenrobot.eventbus.EventBus;
@@ -112,7 +113,7 @@ public class HomeFragment extends Fragment {
 
         EventBus.getDefault().register(this);
 
-        DataBaseManager.getInstance().getUserInfo(Profile.getCurrentProfile().getId());
+        DataBaseManager.getInstance().getUserInfo(AccessToken.getCurrentAccessToken().getUserId());
 
         btAdapter = BluetoothAdapter.getDefaultAdapter();       // get Bluetooth adapter
 

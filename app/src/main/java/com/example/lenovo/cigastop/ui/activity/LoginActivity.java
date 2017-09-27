@@ -70,7 +70,7 @@ public class LoginActivity extends AppCompatActivity {
                             if (object.has("gender"))
                                 userInfo.setGender(object.getString("gender"));
                             if (object.has("picture") && object.getJSONObject("picture").has("data") && object.getJSONObject("picture").getJSONObject("data").has("url"))
-                                userInfo.setPicture(object.getJSONObject("picture").getJSONObject("data").getString("url").replaceAll(".", "\\."));
+                                userInfo.setPicture(object.getJSONObject("picture").getJSONObject("data").getString("url"));
                             DataBaseManager.getInstance().setUserInfo(userInfo);
                         } catch (JSONException e) {
                             e.printStackTrace();

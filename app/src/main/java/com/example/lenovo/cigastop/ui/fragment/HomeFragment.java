@@ -2,15 +2,12 @@ package com.example.lenovo.cigastop.ui.fragment;
 
 import android.app.Notification;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
@@ -38,9 +35,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.reflect.Method;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.UUID;
@@ -110,22 +104,11 @@ public class HomeFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this, v);
 
-
-//        Intent intent = getIntent();
-//        int ciga = intent.getExtras().getInt("setciga");
+//        Bundle extra = getArguments();
+//        int setciga = getArguments().getInt("setciga");
+//        Log.d("intentset"+setciga,"");
 
         final NotificationManager nm = (NotificationManager)getContext().getSystemService(getContext().NOTIFICATION_SERVICE);
-        PendingIntent pendingIntent = PendingIntent.getActivity(getContext(), 0 , new Intent(getContext(), getClass()),PendingIntent.FLAG_UPDATE_CURRENT);
-
-        final NotificationCompat.Builder mCompatBuilder = new NotificationCompat.Builder(getContext());
-        mCompatBuilder.setSmallIcon(R.mipmap.ciga);
-        mCompatBuilder.setContentTitle("담배");
-        mCompatBuilder.setContentText("담배");
-        mCompatBuilder.setWhen(System.currentTimeMillis());
-        mCompatBuilder.setDefaults(Notification.DEFAULT_SOUND | Notification.DEFAULT_VIBRATE);
-        mCompatBuilder.setContentIntent(pendingIntent);
-        mCompatBuilder.setAutoCancel(true);
-
 
         EventBus.getDefault().register(this);
 
@@ -161,8 +144,15 @@ public class HomeFragment extends Fragment {
                 onBtn.setBackgroundResource(R.drawable.lock);
                 //mConnectedThread.write("1");
                 Toast.makeText(getActivity(), "OPEN", Toast.LENGTH_SHORT).show();
-                nm.notify(0,mCompatBuilder.build());
                 todayCiga();
+                final NotificationCompat.Builder mCompatBuilder = new NotificationCompat.Builder(getContext());
+                mCompatBuilder.setSmallIcon(R.mipmap.ciga);
+                mCompatBuilder.setContentTitle("설정담배개수" + userInfo.getSettingciga() + "개");
+                mCompatBuilder.setContentText("CigaStop");
+                mCompatBuilder.setWhen(System.currentTimeMillis());
+                mCompatBuilder.setDefaults(Notification.DEFAULT_SOUND | Notification.DEFAULT_VIBRATE);
+                mCompatBuilder.setAutoCancel(true);
+                nm.notify(0,mCompatBuilder.build());
             }
         });
 
@@ -238,7 +228,6 @@ public class HomeFragment extends Fragment {
                 Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
                 Toast.makeText(getActivity(), "블루투스 꺼져있음", Toast.LENGTH_SHORT).show();
                 startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
-
             }
             return true;
         }
@@ -422,6 +411,7 @@ public class HomeFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         EventBus.getDefault().unregister(this);
-        timerTask.cancel();
+        if(timerTask != null)
+            timerTask.cancel();
     }
 }

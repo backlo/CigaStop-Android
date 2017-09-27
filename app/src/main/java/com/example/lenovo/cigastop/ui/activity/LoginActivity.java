@@ -27,6 +27,8 @@ import java.util.Arrays;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+
+
 /**
  * Created by trycatch on 2017. 9. 20..
  */
@@ -57,7 +59,16 @@ public class LoginActivity extends AppCompatActivity {
                     public void onCompleted(JSONObject object, GraphResponse response) {
                         Log.v("result",object.toString());
                         try {
-                            DataBaseManager.getInstance().setUserInfo(new UserInfo(object.getString("id"), object.getString("name"), object.getString("email"), object.getString("gender"), 0, 0, 0, 0, 0, 0) );
+                            UserInfo userInfo = new UserInfo("", "", "", "", 0, 0, 0, 0, 0, 0);
+                            if(object.has("id"))
+                                userInfo.setId(object.getString("id"));
+                            if(object.has("name"))
+                                userInfo.setName(object.getString("name"));
+                            if (object.has("email"))
+                                userInfo.setEmail(object.getString("email"));
+                            if (object.has("gender"))
+                                userInfo.setGender(object.getString("gender"));
+                            DataBaseManager.getInstance().setUserInfo(userInfo);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

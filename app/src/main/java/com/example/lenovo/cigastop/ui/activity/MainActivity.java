@@ -5,11 +5,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.example.lenovo.cigastop.model.UserInfo;
+import com.example.lenovo.cigastop.model.UserInfoEvent;
 import com.example.lenovo.cigastop.ui.adapter.PagerAdapter;
 import com.example.lenovo.cigastop.R;
 import com.example.lenovo.cigastop.util.DataBaseManager;
 import com.facebook.Profile;
+
+import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -17,6 +23,12 @@ import butterknife.ButterKnife;
 public class MainActivity extends AppCompatActivity {
     @BindView(R.id.main_viewpager)
     ViewPager main_viewpager;
+
+    @BindView(R.id.profile_img)
+    ImageView profile_img;
+
+    @BindView(R.id.greeting_message)
+    TextView greeting_message;
 
     @BindView(R.id.btn_home)
     ImageView btn_home;
@@ -73,5 +85,14 @@ public class MainActivity extends AppCompatActivity {
         btn_setting.setOnClickListener(tabOnclick);
 
         DataBaseManager.getInstance().getUserInfo(Profile.getCurrentProfile().getId());
+    }
+
+    @Subscribe
+    public void UserInfoEvent(UserInfoEvent userInfoEvent){
+        if(userInfoEvent.isResult()){
+            UserInfo userInfo = userInfoEvent.getUserInfo();
+            Glide.with(this).load(userInfo.getPicture()).into(profile_img);
+            greeting_message.setText(userInfo.getName() + "님 어서오세요 오늘도 금연 화이팅!");
+        }
     }
 }

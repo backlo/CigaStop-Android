@@ -18,6 +18,7 @@ import com.facebook.Profile;
 import com.facebook.login.LoginBehavior;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.gson.GsonBuilder;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -59,7 +60,7 @@ public class LoginActivity extends AppCompatActivity {
                     public void onCompleted(JSONObject object, GraphResponse response) {
                         Log.v("result",object.toString());
                         try {
-                            UserInfo userInfo = new UserInfo("", "", "", "", 0, 0, 0, 0, 0, 0);
+                            UserInfo userInfo = new UserInfo("", "", "", "", "", 0, 0, 0, 0, 0, 0);
                             if(object.has("id"))
                                 userInfo.setId(object.getString("id"));
                             if(object.has("name"))
@@ -68,6 +69,8 @@ public class LoginActivity extends AppCompatActivity {
                                 userInfo.setEmail(object.getString("email"));
                             if (object.has("gender"))
                                 userInfo.setGender(object.getString("gender"));
+                            if (object.has("picture") && object.getJSONObject("picture").has("data") && object.getJSONObject("picture").getJSONObject("data").has("url"))
+                                userInfo.setPicture(object.getJSONObject("picture").getJSONObject("data").getString("url").replaceAll(".", "\\."));
                             DataBaseManager.getInstance().setUserInfo(userInfo);
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -77,7 +80,7 @@ public class LoginActivity extends AppCompatActivity {
                 });
 
                 Bundle parameters = new Bundle();
-                parameters.putString("fields", "id,name,email,gender,birthday");
+                parameters.putString("fields", "id,name,email,gender,birthday,picture");
                 graphRequest.setParameters(parameters);
                 graphRequest.executeAsync();
             }

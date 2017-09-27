@@ -297,6 +297,7 @@ public class HomeFragment extends Fragment {
     public void UserInfoEvent(UserInfoEvent userInfoEvent) {
         if (userInfoEvent.isResult()) {
 
+
             userInfo = userInfoEvent.getUserInfo();
             allCiga = userInfo.getCount();
             allciga.setText(allCiga + "");

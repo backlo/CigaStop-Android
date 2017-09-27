@@ -1,5 +1,7 @@
 package com.example.lenovo.cigastop.model;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by trycatch on 2017. 9. 24..
  */
@@ -9,6 +11,7 @@ public class UserInfo {
     private String name;
     private String email;
     private String gender;
+    private String picture;
     private int count;
     private int today;
     private int remind;
@@ -19,11 +22,12 @@ public class UserInfo {
     public UserInfo() {
     }
 
-    public UserInfo(String id, String name, String email, String gender, int count, int today, int remind, int settingciga, long time, long coolTime) {
+    public UserInfo(String id, String name, String email, String gender, String picture, int count, int today, int remind, int settingciga, long time, long coolTime) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.gender = gender;
+        this.picture = picture;
         this.count = count;
         this.today = today;
         this.remind = remind;
@@ -62,6 +66,18 @@ public class UserInfo {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
+
+    public void setCoolTime(long coolTime) {
+        this.coolTime = coolTime;
     }
 
     public int getCount() {
@@ -110,5 +126,32 @@ public class UserInfo {
 
     public void setCoolTime(int hour, int minute, int second) {
         this.coolTime = (hour * 60 * 60 * 1000) + (minute * 60 * 1000) + (second * 1000);
+    }
+
+    public class Picture{
+        @SerializedName("data")
+        private Data data;
+        public Data getData() {
+            return data;
+        }
+    }
+
+    public class Data{
+        @SerializedName("is_silhouette")
+        private boolean is_silhouette;
+        @SerializedName("url")
+        private String url;
+
+        public boolean is_silhouette() {
+            return is_silhouette;
+        }
+
+        public String getUrl() {
+            return url;
+        }
+
+        public void setUrl(String url) {
+            this.url = url;
+        }
     }
 }

@@ -46,7 +46,6 @@ public class SetCigaActivity extends AppCompatActivity {
                 if(info != null) {
                     info.setSettingciga(setCiga);
                     DataBaseManager.getInstance().setUserInfo(info);
-
                 }
                 finish();
             }
@@ -60,10 +59,6 @@ public class SetCigaActivity extends AppCompatActivity {
         numberPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-               /* Toast.makeText(getApplicationContext(),"Selected Value is : " + newVal,Toast.LENGTH_SHORT).show();
-                //값전달하면됨
-                Intent intent= new Intent();
-                intent.putExtra("todayciga",newVal);*/
                 setCiga = newVal;
             }
         });

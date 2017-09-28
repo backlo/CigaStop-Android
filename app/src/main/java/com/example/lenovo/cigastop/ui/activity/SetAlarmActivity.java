@@ -1,6 +1,7 @@
 package com.example.lenovo.cigastop.ui.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -12,12 +13,17 @@ import android.widget.Toast;
 
 import com.example.lenovo.cigastop.R;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 
 public class SetAlarmActivity extends AppCompatActivity {
     ImageView imageView;
     Switch aSwitch;
     Switch bSwitch;
 
+    @BindView(R.id.btn_home)
+    ImageView home;
 
     AudioManager audioManager;
 
@@ -25,6 +31,18 @@ public class SetAlarmActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set_alarm);
+
+        ButterKnife.bind(this);
+
+        home.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+
 
         audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 

@@ -27,7 +27,6 @@ import com.example.lenovo.cigastop.model.UserInfoEvent;
 import com.example.lenovo.cigastop.util.DataBaseManager;
 import com.example.lenovo.cigastop.util.Util;
 import com.facebook.AccessToken;
-import com.facebook.Profile;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -272,7 +271,6 @@ public class HomeFragment extends Fragment {
         userInfo.setCount(allCiga);
         userInfo.setToday(todayCiga);
         userInfo.setRemind(remindCiga);
-        userInfo.setCoolTime(1, 30, 00);
         userInfo.setTime(Util.getInstance().getCurTime() + userInfo.getCoolTime());
 
         DataBaseManager.getInstance().setUserInfo(userInfo);

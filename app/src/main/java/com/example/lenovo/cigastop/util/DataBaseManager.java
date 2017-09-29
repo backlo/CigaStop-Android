@@ -92,7 +92,8 @@ public class DataBaseManager {
         rankingRef.child(id).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                ArrayList<RankingModel> rankingModels = new ArrayList<RankingModel>();
+                ArrayList<RankingModel> rankingModels = new ArrayList
+                        <RankingModel>();
                 Iterator<DataSnapshot> iterator = dataSnapshot.getChildren().iterator();
                 while(iterator.hasNext()) {
                     DataSnapshot data = iterator.next();

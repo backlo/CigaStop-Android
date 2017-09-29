@@ -362,7 +362,12 @@ public class HomeFragment extends Fragment {
                             time.setSecond(second);
                         }
                         else{
-                            onBtn.setVisibility(View.VISIBLE);
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    onBtn.setVisibility(View.VISIBLE);
+                                }
+                            });
                             timerTask.cancel();
                         }
                         final long finalHour = hour;

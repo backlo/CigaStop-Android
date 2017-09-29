@@ -52,6 +52,7 @@ public class SettingListAdapter extends BaseAdapter {
 
         settinglist.add(mysetting);
     }
+
     public class MySetting {
         String mSetting;
 

@@ -1,7 +1,6 @@
 package com.example.lenovo.cigastop.ui.fragment;
 
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -31,20 +30,6 @@ public class SettingFragment extends Fragment {
 
     SettingListAdapter adapter;
     private ListView listView;
-
-    public static interface SettingSelection {
-        public void onsettingSelection(int position);
-    }
-
-    public SettingSelection callback;
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof SettingSelection) {
-            callback = (SettingSelection) context;
-        }
-    }
 
 
     @Nullable

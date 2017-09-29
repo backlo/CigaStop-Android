@@ -31,13 +31,6 @@ public class SetCigaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_set_ciga);
 
         ButterKnife.bind(this);
-
-//        HomeFragment fragment = new HomeFragment();
-//        Bundle bundle = new Bundle();
-//        bundle.putInt("setciga",setCiga);
-//        fragment.setArguments(bundle);
-//        Log.d("setciga"+setCiga,"setciga");
-
         backbtn = (ImageView)findViewById(R.id.backbtn);
         backbtn.setOnClickListener(new View.OnClickListener() {
             @Override

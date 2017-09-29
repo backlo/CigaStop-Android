@@ -19,6 +19,7 @@ import com.example.lenovo.cigastop.ui.activity.SetLogoutActivity;
 import com.example.lenovo.cigastop.ui.activity.SetTimeActivity;
 import com.example.lenovo.cigastop.ui.activity.SetVersionActivity;
 import com.example.lenovo.cigastop.ui.adapter.SettingListAdapter;
+import com.facebook.login.LoginManager;
 
 import butterknife.ButterKnife;
 
@@ -73,8 +74,8 @@ public class SettingFragment extends Fragment {
                         Toast.makeText(getContext(),"버전 정보",Toast.LENGTH_SHORT).show();
                         break;
                     case 4:
-                        Intent intent5 = new Intent(getActivity(), SetLogoutActivity.class);
-                        startActivity(intent5);
+                        LoginManager.getInstance().logOut();
+                        getActivity().finish();
                         Toast.makeText(getContext(),"로그 아웃",Toast.LENGTH_SHORT).show();
                         break;
                 }

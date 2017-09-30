@@ -59,6 +59,7 @@ public class SetTimeActivity extends AppCompatActivity {
                         info.setCoolTime(hour, minute, second);
                         DataBaseManager.getInstance().setUserInfo(info);
                     }
+
                 finish();
             }
         });

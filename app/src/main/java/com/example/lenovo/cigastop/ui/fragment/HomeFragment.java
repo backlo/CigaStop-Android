@@ -142,13 +142,13 @@ public class HomeFragment extends Fragment {
 
             public void onClick(View v) {
                 onBtn.setBackgroundResource(R.drawable.lock);
-                //mConnectedThread.write("1");
+                mConnectedThread.write("1");
                 Toast.makeText(getActivity(), "OPEN", Toast.LENGTH_SHORT).show();
                 todayCiga();
                 final NotificationCompat.Builder mCompatBuilder = new NotificationCompat.Builder(getContext());
                 mCompatBuilder.setSmallIcon(R.mipmap.ciga);
-                mCompatBuilder.setContentTitle("설정담배개수" + userInfo.getSettingciga() + "개");
-                mCompatBuilder.setContentText("CigaStop");
+                mCompatBuilder.setContentTitle("설정한담배개수" + userInfo.getSettingciga() + "개");
+                mCompatBuilder.setContentText("오늘핀담배개수"+userInfo.getToday()+"개");
                 mCompatBuilder.setWhen(System.currentTimeMillis());
                 mCompatBuilder.setDefaults(Notification.DEFAULT_SOUND | Notification.DEFAULT_VIBRATE);
                 mCompatBuilder.setAutoCancel(true);
@@ -187,33 +187,33 @@ public class HomeFragment extends Fragment {
     // @Override
     public void onPause() {
         super.onPause();
-        /*try {
-            btSocket.close();
-            btAdapter = BluetoothAdapter.getDefaultAdapter();       // get Bluetooth adapter
-
-            if (checkBTState()) {
-                BluetoothDevice device = btAdapter.getRemoteDevice(address);
-                try {
-                    btSocket = createBluetoothSocket(device);
-                } catch (Exception e) {
-                }
-                btAdapter.cancelDiscovery();
-
-                try {
-                    btSocket.connect();
-                } catch (Exception e) {
-                    try {
-                        btSocket.close();
-                    } catch (Exception e2) {
-                    }
-                }
-
-                mConnectedThread = new ConnectedThread(btSocket);
-                mConnectedThread.start();
-            }
-            Toast.makeText(getActivity(), "켜짐", Toast.LENGTH_SHORT).show();
-        } catch (Exception e2) {
-        }*/
+//        try {
+//            btSocket.close();
+//            btAdapter = BluetoothAdapter.getDefaultAdapter();       // get Bluetooth adapter
+//
+//            if (checkBTState()) {
+//                BluetoothDevice device = btAdapter.getRemoteDevice(address);
+//                try {
+//                    btSocket = createBluetoothSocket(device);
+//                } catch (Exception e) {
+//                }
+//                btAdapter.cancelDiscovery();
+//
+//                try {
+//                    btSocket.connect();
+//                } catch (Exception e) {
+//                    try {
+//                        btSocket.close();
+//                    } catch (Exception e2) {
+//                    }
+//                }
+//
+//                mConnectedThread = new ConnectedThread(btSocket);
+//                mConnectedThread.start();
+//            }
+//            Toast.makeText(getActivity(), "켜짐", Toast.LENGTH_SHORT).show();
+//        } catch (Exception e2) {
+//        }
     }
 
     private boolean checkBTState() {

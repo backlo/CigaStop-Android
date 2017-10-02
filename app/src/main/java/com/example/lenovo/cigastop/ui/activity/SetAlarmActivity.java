@@ -27,7 +27,7 @@ public class SetAlarmActivity extends AppCompatActivity {
 
     @BindView(R.id.btn_home)
     ImageView home;
-    private boolean setalarm;
+    //private boolean setalarm;
 
     AudioManager audioManager;
 
@@ -42,12 +42,12 @@ public class SetAlarmActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                UserInfo info = Util.getInstance().getUserInfo();
+                /*serInfo info = Util.getInstance().getUserInfo();
                 if(info != null) {
                     info.setSetalarm(setalarm);
                     DataBaseManager.getInstance().setUserInfo(info);
-                }
-                finish();
+                }*/
+
             }
         });
 
@@ -86,11 +86,11 @@ public class SetAlarmActivity extends AppCompatActivity {
                     audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
                     audioManager.setStreamVolume(AudioManager.STREAM_RING, audioManager.getStreamMaxVolume(AudioManager.STREAM_RING), audioManager.FLAG_PLAY_SOUND);
                     Toast.makeText(getApplicationContext(), "소리모드 실행", Toast.LENGTH_SHORT).show();
-                    setalarm = true;
+                    //setalarm = true;
                 } else {
                     audioManager.setRingerMode(AudioManager.RINGER_MODE_VIBRATE);
                     Toast.makeText(getApplicationContext(), "진동모드 실행", Toast.LENGTH_SHORT).show();
-                    setalarm  = false;
+                    //setalarm  = false;
                 }
             }
         });

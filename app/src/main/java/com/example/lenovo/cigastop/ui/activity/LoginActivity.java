@@ -60,7 +60,7 @@ public class LoginActivity extends AppCompatActivity {
                     public void onCompleted(JSONObject object, GraphResponse response) {
                         Log.v("result",object.toString());
                         try {
-                            UserInfo userInfo = new UserInfo("", "", "", "", "", 0, 0, 0, 0, 0, 0);
+                            UserInfo userInfo = new UserInfo("", "", "", "", "", 0, 0, 0, 0, 0, 0, false);
                             if(object.has("id"))
                                 userInfo.setId(object.getString("id"));
                             if(object.has("name"))

@@ -240,11 +240,11 @@
         android:gravity="center">
 
         <ImageView
+            android:id="@+id/breath"
             android:layout_width="80dp"
             android:layout_height="90dp"
             android:layout_marginRight="50dp"
-            android:scaleType="fitXY"
-            android:id="@+id/breath" />
+            android:scaleType="fitXY" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -258,10 +258,10 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/goaltext"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#000000"
-                    android:id="@+id/goaltext"
                     android:textSize="22sp"
                     android:textStyle="bold" />
 
@@ -281,9 +281,9 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/remindciga"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/remindciga"
                     android:textColor="#000000"
                     android:textSize="22sp"
                     android:textStyle="bold" />

@@ -22,7 +22,7 @@ public class UserInfo {
     public UserInfo() {
     }
 
-    public UserInfo(String id, String name, String email, String gender, String picture, int count, int d, int remind, int settingciga, long time, long coolTime) {
+    public UserInfo(String id, String name, String email, String gender, String picture, int count, int today, int remind, int settingciga, long time, long coolTime) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -104,7 +104,9 @@ public class UserInfo {
         this.remind = remind;
     }
 
-    public int getSettingciga() {return settingciga;}
+    public int getSettingciga() {
+        return settingciga;
+    }
 
     public void setSettingciga(int settingciga) {
         this.settingciga = settingciga;

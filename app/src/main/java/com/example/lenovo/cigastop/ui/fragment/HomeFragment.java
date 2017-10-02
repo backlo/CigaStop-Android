@@ -187,33 +187,33 @@ public class HomeFragment extends Fragment {
     // @Override
     public void onPause() {
         super.onPause();
-//        try {
-//            btSocket.close();
-//            btAdapter = BluetoothAdapter.getDefaultAdapter();       // get Bluetooth adapter
-//
-//            if (checkBTState()) {
-//                BluetoothDevice device = btAdapter.getRemoteDevice(address);
-//                try {
-//                    btSocket = createBluetoothSocket(device);
-//                } catch (Exception e) {
-//                }
-//                btAdapter.cancelDiscovery();
-//
-//                try {
-//                    btSocket.connect();
-//                } catch (Exception e) {
-//                    try {
-//                        btSocket.close();
-//                    } catch (Exception e2) {
-//                    }
-//                }
-//
-//                mConnectedThread = new ConnectedThread(btSocket);
-//                mConnectedThread.start();
-//            }
-//            Toast.makeText(getActivity(), "켜짐", Toast.LENGTH_SHORT).show();
-//        } catch (Exception e2) {
-//        }
+        /*try {
+            btSocket.close();
+            btAdapter = BluetoothAdapter.getDefaultAdapter();       // get Bluetooth adapter
+
+            if (checkBTState()) {
+                BluetoothDevice device = btAdapter.getRemoteDevice(address);
+                try {
+                    btSocket = createBluetoothSocket(device);
+                } catch (Exception e) {
+                }
+                btAdapter.cancelDiscovery();
+
+                try {
+                    btSocket.connect();
+                } catch (Exception e) {
+                    try {
+                        btSocket.close();
+                    } catch (Exception e2) {
+                    }
+                }
+
+                mConnectedThread = new ConnectedThread(btSocket);
+                mConnectedThread.start();
+            }
+            Toast.makeText(getActivity(), "켜짐", Toast.LENGTH_SHORT).show();
+        } catch (Exception e2) {
+        }*/
     }
 
     private boolean checkBTState() {
@@ -360,12 +360,7 @@ public class HomeFragment extends Fragment {
                             time.setSecond(second);
                         }
                         else{
-                            getActivity().runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    onBtn.setVisibility(View.VISIBLE);
-                                }
-                            });
+                            onBtn.setVisibility(View.VISIBLE);
                             timerTask.cancel();
                         }
                         final long finalHour = hour;

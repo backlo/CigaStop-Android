@@ -20,21 +20,22 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@mipmap/home_btn"/>
+            android:background="#00ff0000"
+            android:src="@drawable/home_btn"/>
 
         <ImageView
             android:id="@+id/btn_friend"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@mipmap/friend_btn"/>
+            android:src="@drawable/friend_btn"/>
 
         <ImageView
             android:id="@+id/btn_setting"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@mipmap/setting_btn"/>
+            android:src="@drawable/setting_btn"/>
 
     </LinearLayout>
 
@@ -47,7 +48,7 @@
             android:id="@+id/backbtn"
             android:layout_width="77dp"
             android:layout_height="67dp"
-            android:src="@mipmap/backarrow" />
+            android:src="@drawable/backarrow" />
 
         <TextView
             android:layout_width="match_parent"
